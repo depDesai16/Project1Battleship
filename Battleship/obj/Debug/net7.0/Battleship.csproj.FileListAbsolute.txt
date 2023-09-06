@@ -1,0 +1,15 @@
+/Users/deepdesai/Projects/Battleship/Battleship/bin/Debug/net7.0/Battleship
+/Users/deepdesai/Projects/Battleship/Battleship/bin/Debug/net7.0/Battleship.deps.json
+/Users/deepdesai/Projects/Battleship/Battleship/bin/Debug/net7.0/Battleship.runtimeconfig.json
+/Users/deepdesai/Projects/Battleship/Battleship/bin/Debug/net7.0/Battleship.dll
+/Users/deepdesai/Projects/Battleship/Battleship/bin/Debug/net7.0/Battleship.pdb
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/Battleship.csproj.AssemblyReference.cache
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/Battleship.GeneratedMSBuildEditorConfig.editorconfig
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/Battleship.AssemblyInfoInputs.cache
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/Battleship.AssemblyInfo.cs
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/Battleship.csproj.CoreCompileInputs.cache
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/Battleship.dll
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/refint/Battleship.dll
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/Battleship.pdb
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/Battleship.genruntimeconfig.cache
+/Users/deepdesai/Projects/Battleship/Battleship/obj/Debug/net7.0/ref/Battleship.dll
