@@ -8,6 +8,7 @@
 ///////////////////////////////////////////////////////
 
 using System;
+using System.Text.RegularExpressions;
 using Battleship;
 
 namespace Battleship
@@ -27,7 +28,7 @@ namespace Battleship
 
 		public string Name { get; set; }
 
-		protected Ship(Coord2D position, DirectionType direction, byte length)
+		public Ship(Coord2D position, DirectionType direction, byte length)
 		{
 			Position = position;
 			Direction = direction;
@@ -39,18 +40,19 @@ namespace Battleship
 			{
 				for (int i = 0; i < length; i++)
 				{
-                    Points[0] = (Coord2D position.xCor, Coord2D position.yCor);
-
+                    Points[i] = new Coord2D() { xCor = position.xCor + i, yCor = position.yCor };
                 }
 			}
 
 			else if (direction == DirectionType.Horizontal)
 			{
-
-			}
+                for (int i = 0; i < length; i++)
+                {
+                    Points[i] = new Coord2D() { xCor = position.xCor, yCor = position.yCor + i };
+                }
+            }
 		}
 
-		//Checks if ship has been hit - returns True or False
 		public bool CheckIfHit(Coord2D point)
 		{
 			if (Points.Contains(point))
@@ -116,8 +118,16 @@ namespace Battleship
 				$"Alive or Dead: {isDead()} \n Position: {Position} \n Length: {Length} \n Direction: {Direction}" ;
 		}
 
+		public bool VerifyShipString()
+		{
+			string pattern = @"(Carrier|Battleship|Destroyer|Submarine|Patrol Boat),\s*[0-5],\s*[h|v],\s*[0-9],\s*[0-9]";
+            Regex regex = new Regex(pattern);
+
+			
+			return true;
+		}
+
     }
 
 }
-
 
