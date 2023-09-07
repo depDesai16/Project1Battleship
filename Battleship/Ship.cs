@@ -15,17 +15,17 @@ namespace Battleship
 	public abstract class Ship : IHealth, IInfomatic
 	{
 
-		private Coord2D Position;
+		private Coord2D Position { get; set; }
 
-		private byte Length;
+		private byte Length { get; set; }
 
-		private Coord2D[] Points;
+		private Coord2D[] Points { get; set; }
 
-		private DirectionType Direction;
+		private DirectionType Direction { get; set; }
 
-        private List<Coord2D> DamagedPoints;
+        private List<Coord2D> DamagedPoints { get; set; }
 
-		private string Name;
+		public string Name { get; set; }
 
 		protected Ship(Coord2D position, DirectionType direction, byte length)
 		{
@@ -37,7 +37,11 @@ namespace Battleship
 
 			if (direction == DirectionType.Vertical)
 			{
-				
+				for (int i = 0; i < length; i++)
+				{
+                    Points[0] = (Coord2D position.xCor, Coord2D position.yCor);
+
+                }
 			}
 
 			else if (direction == DirectionType.Horizontal)
@@ -111,54 +115,6 @@ namespace Battleship
 			return $"Ship Info: \n Health: {GetMaxHealth()} \n Current Health: {GetCurrentHealth()} " +
 				$"Alive or Dead: {isDead()} \n Position: {Position} \n Length: {Length} \n Direction: {Direction}" ;
 		}
-
-
-		//Ships' Subtype class
-		public class Carrier : Ship
-		{
-			public Carrier(Coord2D position, DirectionType direction)
-				: base(position, direction, 5)
-			{
-				Name = "Carrier";
-			}
-		}
-
-        public class Battleship : Ship
-        {
-            public Battleship(Coord2D position, DirectionType direction)
-                : base(position, direction, 4)
-            {
-				Name = "BattleShip";
-            }
-        }
-
-        public class Destroyer : Ship
-        {
-            public Destroyer(Coord2D position, DirectionType direction)
-                : base(position, direction, 3)
-            {
-				Name = "Destroyer";
-            }
-        }
-
-        public class Submarine : Ship
-        {
-            public Submarine(Coord2D position, DirectionType direction)
-                : base(position, direction, 3)
-            {
-				Name = "Submarine";
-            }
-        }
-
-        public class PatrolBoat : Ship
-        {
-            public PatrolBoat(Coord2D position, DirectionType direction)
-                : base(position, direction, 2)
-            {
-				Name = "Patrol Boat";
-            }
-        }
-
 
     }
 
