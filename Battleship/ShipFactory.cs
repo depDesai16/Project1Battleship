@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Reflection.PortableExecutable;
 using System.Text.RegularExpressions;
 
 namespace Battleship
 {
 	public class ShipFactory
 	{
-        public bool VerifyShipString(string info)
+        static bool VerifyShipString(string info)
         {
             string pattern = @"(Carrier|Battleship|Destroyer|Submarine|Patrol Boat),\s*[2-5],\s*[h|v],\s*[0-9],\s*[0-9]";
             Regex regex = new Regex(pattern);
@@ -47,10 +48,7 @@ namespace Battleship
             
         }
 
-
-
-
-        public Ship ParseShipString(string info)
+        static Ship ParseShipString(string info)
         {
             if (VerifyShipString(info) == false)
             {
@@ -93,29 +91,51 @@ namespace Battleship
         }
 
 
-        public Ship[] ParseShipFile(string file)
+        public static Ship[] ParseShipFile(string file)
         {
+
             List<Ship> listShips = new List<Ship>();
 
-            foreach (string line in File.ReadLines(file))
+            try
             {
-                if (!line.TrimStart().StartsWith("#")) //ChatGPT helped me with this line
+                List<string> fileLine = new List<string>();
+                using (StreamReader fileReader = new StreamReader(file))
+
                 {
-                    if (VerifyShipString(line))
-                    {
-                        Ship newShip = ParseShipString(line);
-                        listShips.Add(newShip);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid Format");
-                    }
+                    string line;
+                    while ((line = fileReader.ReadLine()) != null)
+
+                        fileLine.Add(line);
                 }
+
+
+                foreach (string line in fileLine)
+                {
+                    if (!line.TrimStart().StartsWith("#")) //ChatGPT helped me with this line
+                    {
+                        if (VerifyShipString(line))
+                        {
+                            Ship newShip = ParseShipString(line);
+                            listShips.Add(newShip);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Format");
+                        }
+                    }
+
+                }
+
 
             }
 
-            //Deep Copies listShips to an array
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("File not found");
+            }
+
             return listShips.ToArray();
+
         }
 
     }
