@@ -93,17 +93,30 @@ namespace Battleship
         }
 
 
+        public Ship[] ParseShipFile(string file)
+        {
+            List<Ship> listShips = new List<Ship>();
 
+            foreach (string line in File.ReadLines(file))
+            {
+                if (!line.TrimStart().StartsWith("#")) //ChatGPT helped me with this line
+                {
+                    if (VerifyShipString(line))
+                    {
+                        Ship newShip = ParseShipString(line);
+                        listShips.Add(newShip);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Format");
+                    }
+                }
 
+            }
 
-
-
-
-
-
-
-
-
+            //Deep Copies listShips to an array
+            return listShips.ToArray();
+        }
 
     }
 }
