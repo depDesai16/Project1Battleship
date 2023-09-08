@@ -20,7 +20,7 @@ namespace Battleship
 
 		private byte Length { get; set; }
 
-		private Coord2D[] Points { get; set; }
+		private List<Coord2D> Points { get; set; }
 
 		private DirectionType Direction { get; set; }
 
@@ -34,13 +34,11 @@ namespace Battleship
 			Direction = direction;
 			Length = length;
 
-			Coord2D[] Points = new Coord2D[length];
-
 			if (direction == DirectionType.Vertical)
 			{
 				for (int i = 0; i < length; i++)
 				{
-                    Points[i] = new Coord2D() { xCor = position.xCor + i, yCor = position.yCor };
+                    Points.Add(new Coord2D() { xCor = position.xCor, yCor = position.yCor + i});
                 }
 			}
 
@@ -48,7 +46,7 @@ namespace Battleship
 			{
                 for (int i = 0; i < length; i++)
                 {
-                    Points[i] = new Coord2D() { xCor = position.xCor, yCor = position.yCor + i };
+                    Points.Add(new Coord2D() { xCor = position.xCor + i, yCor = position.yCor});
                 }
             }
 		}
@@ -118,14 +116,6 @@ namespace Battleship
 				$"Alive or Dead: {isDead()} \n Position: {Position} \n Length: {Length} \n Direction: {Direction}" ;
 		}
 
-		public bool VerifyShipString()
-		{
-			string pattern = @"(Carrier|Battleship|Destroyer|Submarine|Patrol Boat),\s*[0-5],\s*[h|v],\s*[0-9],\s*[0-9]";
-            Regex regex = new Regex(pattern);
-
-			
-			return true;
-		}
 
     }
 

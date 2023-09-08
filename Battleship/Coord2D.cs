@@ -15,6 +15,12 @@ namespace Battleship
 	{
 		public int xCor;
 		public int yCor;
+
+		public Coord2D(int xCor, int yCor)
+		{
+			this.xCor = xCor;
+			this.yCor = yCor;
+		}
 	}
 }
 
