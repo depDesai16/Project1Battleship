@@ -1,4 +1,13 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////
+///
+///		Author: Deep Desai, desaid@etsu.edu
+///		Course: CSCI-2210-001 - Data Structures
+///		Assignment: BattleShip
+///		Description: ShipFactory Class
+///
+///////////////////////////////////////////////////////
+
+using System;
 using System.Reflection.PortableExecutable;
 using System.Text.RegularExpressions;
 
@@ -57,8 +66,6 @@ namespace Battleship
 
             string[] shipDescription = info.Split(',');
 
-
-
             string shipType = shipDescription[0].Trim();
 
             byte length = byte.Parse(shipDescription[1].Trim());
@@ -69,24 +76,34 @@ namespace Battleship
 
             int yCor = int.Parse(shipDescription[4].Trim());
 
-            switch (shipType.ToUpper())
+            if (shipType.ToUpper() == "CARRIER")
             {
-                case "CARRIER":
-                    return new Carrier(new Coord2D(xCor, yCor), direction);
+                return new Carrier(new Coord2D(xCor, yCor), direction);
+            }
 
-                case "BATTLESHIP":
-                    return new Battleship(new Coord2D(xCor, yCor), direction);
+            if (shipType.ToUpper() == "BATTLESHIP")
+            {
+                return new Battleship(new Coord2D(xCor, yCor), direction);
+            }
 
-                case "DESTROYER":
-                    return new Destroyer(new Coord2D(xCor, yCor), direction);
+            if (shipType.ToUpper() == "DESTROYER")
+            {
+                return new Destroyer(new Coord2D(xCor, yCor), direction);
+            }
 
-                case "SUBMARINE":
-                    return new Submarine(new Coord2D(xCor, yCor), direction);
+            if (shipType.ToUpper() == "SUBMARINE")
+            {
+                return new Submarine(new Coord2D(xCor, yCor), direction);
+            }
 
-                case "PATROLBOAT":
-                    return new PatrolBoat(new Coord2D(xCor, yCor), direction);
+            if (shipType.ToUpper() == "PATROL BOAT")
+            {
+                return new PatrolBoat(new Coord2D(xCor, yCor), direction);
+            }
 
-                default: throw new Exception("Invalid Ship");
+            else
+            {
+                throw new Exception("Invalid Ship Type");
             }
         }
 
@@ -101,32 +118,27 @@ namespace Battleship
                 List<string> fileLine = new List<string>();
                 using (StreamReader fileReader = new StreamReader(file))
 
+
+                while (fileReader.EndOfStream != true)
                 {
-                    string line;
-                    while ((line = fileReader.ReadLine()) != null)
-
-                        fileLine.Add(line);
-                }
-
-
-                foreach (string line in fileLine)
-                {
-                    if (!line.TrimStart().StartsWith("#")) //ChatGPT helped me with this line
+                    string line = fileReader.ReadLine();
+                    if (!line.TrimStart().StartsWith("#"))//ChatGPT
                     {
                         if (VerifyShipString(line))
                         {
-                            Ship newShip = ParseShipString(line);
-                            listShips.Add(newShip);
+                                Ship newShip = ParseShipString(line);
+                                if (line == null)
+                                {
+                                    continue;
+                                }
+                                listShips.Add(newShip);
                         }
                         else
                         {
-                            Console.WriteLine("Invalid Format");
+                            Console.WriteLine("Please enter a new string");
                         }
                     }
-
                 }
-
-
             }
 
             catch (FileNotFoundException)

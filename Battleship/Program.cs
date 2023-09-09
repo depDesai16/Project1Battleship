@@ -1,4 +1,14 @@
-﻿using Battleship;
+﻿///////////////////////////////////////////////////////
+///
+///		Author: Deep Desai, desaid@etsu.edu
+///		Course: CSCI-2210-001 - Data Structures
+///		Assignment: BattleShip
+///		Description: Program Driver
+///
+///////////////////////////////////////////////////////
+
+
+using Battleship;
 using System;
 
 
@@ -20,7 +30,7 @@ class Program
 
         else
         {
-            Console.WriteLine("Enter file of ships' data: ");
+            Console.Write("Enter file of ships' data: ");
             filePath = Console.ReadLine().Replace("\"", "");
         }
 
@@ -38,7 +48,7 @@ class Program
 
         while (startGame)
         {
-            Console.Write("What would you like to do?: info/attack");
+            Console.Write("\n What would you like to do?: info/attack: ");
             string input = Console.ReadLine();
 
             if (input.ToLower() == "info")
@@ -76,28 +86,41 @@ class Program
 
                 Coord2D coordPos = new Coord2D(intCoord[0], intCoord[1]);
 
-                foreach (Ship ship in fileShipList)
-                {
-                    if (ship.CheckIfHit(coordPos) == true)
-                    {
-                        ship.TakeDamage(coordPos);
-                        Console.WriteLine($"Direct Hit!, you hit the opponents: {ship.GetName()}");
-                        if (ship.isDead())
-                        {
-                            Console.WriteLine($"Congrats, you destroyed the opponents: {ship.GetName()}");
-                        }
-                        return;//Since you destroyed the ship
-                    }
-                }
+                Attack(coordPos, fileShipList);
 
-                Console.WriteLine("You missed, try again");
 
             }
+
+
 
         }
 
     }
 
+    static public void Attack(Coord2D coordPos, List<Ship> fileShipList)
+    {
+
+        foreach (Ship ship in fileShipList)
+        {
+            if (ship.CheckIfHit(coordPos) == true)
+            {
+                ship.TakeDamage(coordPos);
+                Console.WriteLine($"Direct Hit!, you hit the opponents: {ship.GetName()}");
+
+
+                if (ship.isDead())
+                {
+                    Console.WriteLine($"Congrats, you destroyed the opponent's: {ship.GetName()}");
+                }
+                return;//Since you destroyed the ship
+
+
+            }
+        }
+        Console.WriteLine("You missed");
+
+
+    }
 
 }
 

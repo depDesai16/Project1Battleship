@@ -3,7 +3,7 @@
 ///		Author: Deep Desai, desaid@etsu.edu
 ///		Course: CSCI-2210-001 - Data Structures
 ///		Assignment: BattleShip
-///		Description:
+///		Description: Parent Ship Class
 ///
 ///////////////////////////////////////////////////////
 
@@ -20,13 +20,13 @@ namespace Battleship
 
 		private byte Length { get; set; }
 
-		private List<Coord2D> Points { get; set; }
+		List <Coord2D> Points = new List<Coord2D>();
 
 		private DirectionType Direction { get; set; }
 
-        private List<Coord2D> DamagedPoints { get; set; }
+        public List<Coord2D> DamagedPoints { get; private set; } = new List<Coord2D>();
 
-		public string Name { get; set; }
+        public string Name { get; set; }
 
 		public Ship(Coord2D position, DirectionType direction, byte length)
 		{
@@ -88,13 +88,14 @@ namespace Battleship
 		//Returns Current Health 
 		public int GetCurrentHealth()
 		{
-			return (GetMaxHealth() - DamagedPoints.Count());
+			//Console.WriteLine($"Ship: {GetName()}, {GetMaxHealth()}, {GetCurrentHealth()}");
+			return (GetMaxHealth() - DamagedPoints.Count);
 		}
 
 		//Checks if ship still has health
 		public bool isDead()
 		{
-			if (GetCurrentHealth() <= 0)
+			if (GetCurrentHealth() == 0)
 			{
 				return true;
 			}
@@ -106,14 +107,15 @@ namespace Battleship
 		//Takes damage but throws an error (wrong parameters)
         public void TakeDamage(int amount)
         {
+
             throw new Exception("Damage can only be received from opponent");
         }
 
 		//Returns Ship's Info as a string
 		public string GetInfo()
 		{
-			return $"Ship Info: \n Health: {GetMaxHealth()} \n Current Health: {GetCurrentHealth()} " +
-				$"Alive or Dead: {isDead()} \n Position: {Position} \n Length: {Length} \n Direction: {Direction}" ;
+			return $"Ship Info: {GetName()} \n Health: {GetMaxHealth()} \n Current Health: {GetCurrentHealth()}" +
+				$"\n Position: {(Position.xCor)},{(Position.yCor)} \n Length: {Length} \n Direction: {Direction}\n" ;
 		}
 
 

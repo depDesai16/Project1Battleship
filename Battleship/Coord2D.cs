@@ -3,7 +3,8 @@
 ///		Author: Deep Desai, desaid@etsu.edu
 ///		Course: CSCI-2210-001 - Data Structures
 ///		Assignment: BattleShip
-///		Description:
+///		Description: Struct Coord2D
+///		For X and Y Coordinates
 ///
 ///////////////////////////////////////////////////////
 
