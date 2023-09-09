@@ -16,10 +16,10 @@ namespace Battleship
     public class Battleship : Ship
     {
         /// <summary>
-        /// Creates a Battleship with parameters: Coord2D position, DirectionType direction
+        /// Child Class of Parent:Ship
         /// </summary>
-        /// <param name="position"></param>
-        /// <param name="direction"></param>
+        /// <param name="position">Top Left Coordinate of Ship</param>
+        /// <param name="direction">Orientation of Ship</param>
         public Battleship(Coord2D position, DirectionType direction)
             : base(position, direction, 4)
         {

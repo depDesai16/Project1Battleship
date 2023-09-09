@@ -28,6 +28,12 @@ namespace Battleship
 
         public string Name { get; set; }
 
+		/// <summary>
+		/// Generates Coordinates of the created ship and stores within Points
+		/// </summary>
+		/// <param name="position">Top Left X and Y coordinates of the ship</param>
+		/// <param name="direction">Orientation of ship</param>
+		/// <param name="length">Length (MaxHealth) of ship</param>
 		public Ship(Coord2D position, DirectionType direction, byte length)
 		{
 			Position = position;
@@ -51,6 +57,11 @@ namespace Battleship
             }
 		}
 
+		/// <summary>
+		/// Checks if user's coordinates would hit a ship
+		/// </summary>
+		/// <param name="point"></param>
+		/// <returns></returns>
 		public bool CheckIfHit(Coord2D point)
 		{
 			if (Points.Contains(point))
@@ -62,8 +73,10 @@ namespace Battleship
 				return false;
 		}
 
-		//Checks if hit point is in Damaged point list
-		//If not, adds point to list and takes "damage"
+		/// <summary>
+		/// Used during attack phase of the game
+		/// </summary>
+		/// <param name="point"></param>
 		public void TakeDamage(Coord2D point)
 		{
             if (!DamagedPoints.Contains(point))
@@ -72,27 +85,37 @@ namespace Battleship
             }
         }
 
-		//Returns name of ship
+		/// <summary>
+		/// Gets specific ship's name
+		/// </summary>
+		/// <returns></returns>
 		public string GetName()
 		{
             return Name;
         }
 
-		//Interfaces' Methods
-		//Returns max health
+		/// <summary>
+		/// Gets the full health of ship to display on info
+		/// </summary>
+		/// <returns></returns>
 		public int GetMaxHealth()
 		{
 			return Length;
 		}
 
-		//Returns Current Health 
+		/// <summary>
+		/// Gets current health of ship to check when user wants info
+		/// </summary>
+		/// <returns></returns>
 		public int GetCurrentHealth()
 		{
-			//Console.WriteLine($"Ship: {GetName()}, {GetMaxHealth()}, {GetCurrentHealth()}");
 			return (GetMaxHealth() - DamagedPoints.Count);
 		}
 
-		//Checks if ship still has health
+		/// <summary>
+		/// Checks if is still alive
+		/// </summary>
+		/// <returns></returns>
 		public bool isDead()
 		{
 			if (GetCurrentHealth() == 0)
@@ -104,14 +127,21 @@ namespace Battleship
 				return false;
 		}
 
-		//Takes damage but throws an error (wrong parameters)
+		/// <summary>
+		/// Method used to practice throwing Exceptions
+		/// </summary>
+		/// <param name="amount">Amount of damage taken</param>
+		/// <exception cref="Exception"></exception>
         public void TakeDamage(int amount)
         {
 
             throw new Exception("Damage can only be received from opponent");
         }
 
-		//Returns Ship's Info as a string
+		/// <summary>
+		/// Format Ship's Infomation into user friendly readable string
+		/// </summary>
+		/// <returns>String</returns>
 		public string GetInfo()
 		{
 			return $"Ship Info: {GetName()} \n Health: {GetMaxHealth()} \n Current Health: {GetCurrentHealth()}" +

@@ -11,7 +11,9 @@
 using System;
 namespace Battleship
 {
-	// Creating the two directions of the ships
+	/// <summary>
+	/// Orientation of Ship
+	/// </summary>
 	public enum DirectionType
 	{
 		Vertical,

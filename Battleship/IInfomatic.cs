@@ -11,6 +11,9 @@ using System;
 
 namespace Battleship
 {
+	/// <summary>
+	/// Simple Blueprint that the Ship class inherits
+	/// </summary>
 	public interface IInfomatic
 	{
 		public string GetInfo();

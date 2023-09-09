@@ -11,7 +11,9 @@
 using System;
 namespace Battleship
 {
-	//Creating a custom data type for each ships' x and y coords
+	/// <summary>
+	/// X and Y coordinates of the ships
+	/// </summary>
 	public struct Coord2D
 	{
 		public int xCor;

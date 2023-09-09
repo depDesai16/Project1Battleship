@@ -48,7 +48,7 @@ class Program
 
         while (startGame)
         {
-            Console.Write("\n What would you like to do?: info/attack: ");
+            Console.Write("\n What would you like to do?: info/attack/exit: ");
             string input = Console.ReadLine();
 
             if (input.ToLower() == "info")
@@ -60,7 +60,7 @@ class Program
                 }
             }
 
-            if (input.ToLower() == "attack")
+            else if (input.ToLower() == "attack")
             {
                 Console.WriteLine("Please enter a point in the format: X,Y");
                 Console.Write("Coordinate: ");
@@ -86,41 +86,46 @@ class Program
 
                 Coord2D coordPos = new Coord2D(intCoord[0], intCoord[1]);
 
-                Attack(coordPos, fileShipList);
-
-
-            }
-
-
-
-        }
-
-    }
-
-    static public void Attack(Coord2D coordPos, List<Ship> fileShipList)
-    {
-
-        foreach (Ship ship in fileShipList)
-        {
-            if (ship.CheckIfHit(coordPos) == true)
-            {
-                ship.TakeDamage(coordPos);
-                Console.WriteLine($"Direct Hit!, you hit the opponents: {ship.GetName()}");
-
-
-                if (ship.isDead())
+                foreach (Ship ship in fileShipList)
                 {
-                    Console.WriteLine($"Congrats, you destroyed the opponent's: {ship.GetName()}");
+                    if (ship.CheckIfHit(coordPos) == true)
+                    {
+                        ship.TakeDamage(coordPos);
+                        Console.WriteLine($"Direct Hit!, you hit the opponents: {ship.GetName()}");
+
+
+                        if (ship.isDead())
+                        {
+                            Console.WriteLine($"Congrats, you destroyed the opponent's: {ship.GetName()}");
+                            startGame = false;
+                        }
+
+
+                    }
+                    
                 }
-                return;//Since you destroyed the ship
-
-
             }
-        }
-        Console.WriteLine("You missed");
 
+            else if (input.ToLower() == "exit")
+            {
+                Console.WriteLine("Goodbye");
+                startGame = false;
+            }
+
+            else
+            {
+                Console.WriteLine("Invalid Command, please try again");
+            }
+
+
+
+
+
+        }
 
     }
+
 
 }
+
 

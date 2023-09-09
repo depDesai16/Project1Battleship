@@ -10,6 +10,9 @@
 using System;
 namespace Battleship
 {
+	/// <summary>
+	/// Blueprint that the Ship Class inherits
+	/// </summary>
 	public interface IHealth
 	{
 

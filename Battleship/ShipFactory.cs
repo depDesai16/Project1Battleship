@@ -15,6 +15,11 @@ namespace Battleship
 {
 	public class ShipFactory
 	{
+        /// <summary>
+        /// Verifies line(s) from file against a Regex to check if ship's creation is possible
+        /// </summary>
+        /// <param name="info">Line from a file</param>
+        /// <returns>Boolean Expression</returns>
         static bool VerifyShipString(string info)
         {
             string pattern = @"(Carrier|Battleship|Destroyer|Submarine|Patrol Boat),\s*[2-5],\s*[h|v],\s*[0-9],\s*[0-9]";
@@ -57,6 +62,12 @@ namespace Battleship
             
         }
 
+        /// <summary>
+        /// Formats verified line from file into correct data types to create the ship object(s).
+        /// </summary>
+        /// <param name="info">Line from File</param>
+        /// <returns>Ship Object</returns>
+        /// <exception cref="Exception">To catch if a user entered an incorrect ship type(mostly for bugs)</exception>
         static Ship ParseShipString(string info)
         {
             if (VerifyShipString(info) == false)
@@ -107,7 +118,12 @@ namespace Battleship
             }
         }
 
-
+        /// <summary>
+        /// Takes entire file and uses the above two methods to verify, create, and store
+        /// these Ship objects together into a list
+        /// </summary>
+        /// <param name="file">User inputted file</param>
+        /// <returns>List of Ships </returns>
         public static Ship[] ParseShipFile(string file)
         {
 
